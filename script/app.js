@@ -53,7 +53,7 @@ async function init() {
 
   // ⭐ MongoDB API
   const res = await fetch(
-    `http://localhost:5000/topic?topic=${encodeURIComponent(topic)}`,
+    `https://derdiedas-backend.onrender.com/topic?topic=${encodeURIComponent(topic)}`,
   );
 
   const data = await res.json();
