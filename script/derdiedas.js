@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // ⭐ MongoDB API çağrısı
     const res = await fetch(
-      "http://localhost:5000/topic?topic=" + encodeURIComponent(topic),
+      "https://derdiedas-backend.onrender.com/topic?topic=" +
+        encodeURIComponent(topic),
     );
 
     if (!res.ok) {
