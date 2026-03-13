@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Der Die Das Game</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/derdiedas.css">
+    <link rel="icon" href="images/logo.png">
+
+</head>
+
+<body class="bg-light">
+    <a href="index.html" id="homeBtn" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill"
+            viewBox="0 0 20 20">
+            <path
+                d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+        </svg>
+        Home
+    </a>
+    <div class="container d-flex justify-content-center align-items-center  my-4">
+
+
+        <div class="game-wrapper text-center">
+
+            <h2 class="mb-4 fw-bold">Der • Die • Das</h2>
+
+            <!-- TIMER -->
+
+            ⏱️ Time: <span id="timer">0</span>
+
+
+            <!-- PROGRESS -->
+            <div class="progress mb-4">
+                <div id="progressBar" class="progress-bar bg-success" style="width:0%"></div>
+            </div>
+
+            <!-- CARD -->
+            <div class="card shadow-lg p-5" id="card">
+
+                <div id="word" class="display-4 mb-4 fw-bold">...</div>
+
+                <div class="d-flex justify-content-center gap-3">
+
+                    <button class="btn btn-info btn-lg px-4" data-answer="der"
+                        style="box-shadow: rgba(173, 190, 217, 0.8) 2px 2px 20px;">der</button>
+                    <button class="btn btn-danger btn-lg px-4" data-answer="die"
+                        style="box-shadow: rgba(173, 190, 217, 0.8) 2px 2px 20px;">die</button>
+                    <button class="btn btn-success btn-lg px-4" data-answer="das"
+                        style="box-shadow: rgba(173, 190, 217, 0.8) 2px 2px 20px;">das</button>
+
+                </div>
+
+            </div>
+
+            <!-- STATS -->
+            <div class="mt-4 fs-5">
+                ✅ Correct: <span id="correct">0</span>
+                |
+                ❌ Wrong: <span id="wrong">0</span>
+            </div>
+
+            <!-- GAME OVER -->
+            <div id="result" class="mt-5" style="display:none;">
+
+                <h2 class="mb-3">Game Over 🎉</h2>
+
+                <h3 class="mb-4">
+                    Score: <span id="score"></span>
+                </h3>
+
+                <div class="row text-start">
+
+                    <div class="col-md-6">
+                        <h5 class="text-success">Correct Words</h5>
+                        <ol id="right"></ol>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5 class="text-danger">Wrong Words</h5>
+                        <ol id="left"></ol>
+                    </div>
+
+                </div>
+
+                <button onclick="location.reload()" class="btn btn-dark my-4 px-5">
+                    Play Again
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script/app.js"></script>
+    <script src="script/derdiedas.js"></script>
+
+</body>
+
+</html>
