@@ -1,44 +1,54 @@
+const loadingEl = document.getElementById("loading");
+const loadingText = document.getElementById("loadingText");
+const contentEl = document.getElementById("content");
+
 document.addEventListener("DOMContentLoaded", async () => {
   try {
+    loadingText.innerText = "Server is waking up... ☕";
+
     // URL’den topic al
     const params = new URLSearchParams(window.location.search);
     const topic = params.get("topic");
 
     if (!topic) {
-      console.error("Topic param missing");
+      loadingText.innerText = "Topic not found";
       return;
     }
 
-    // ⭐ MongoDB API çağrısı
+    // MongoDB API çağrısı
     const res = await fetch(
       "https://derdiedas-backend.onrender.com/topic?topic=" +
         encodeURIComponent(topic),
     );
 
     if (!res.ok) {
-      console.error("API error:", res.status);
+      loadingText.innerText = "API Error";
       return;
     }
 
     const topicData = await res.json();
 
-    // ⭐ MongoDB object kontrol
     if (!topicData || !Array.isArray(topicData.substopics)) {
-      console.error("Topic not found in database");
+      loadingText.innerText = "No data in database";
       return;
     }
 
-    // ⭐ Kelimeleri state’e yükle
+    // state'e yükle
     state.words = shuffle(topicData.substopics);
 
     if (state.words.length === 0) {
-      console.error("No words in this topic");
+      loadingText.innerText = "No words in this topic";
       return;
     }
 
-    // ⭐ İlk kelimeyi göster
+    // ilk kelimeyi göster
     renderWord();
+
+    // ⭐ loading kapat
+    loadingEl.style.display = "none";
+    contentEl.style.display = "block";
   } catch (err) {
-    console.error("MongoDB fetch error:", err);
+    console.error("Mongo fetch error:", err);
+    loadingText.innerText = "Connection error";
   }
 });
