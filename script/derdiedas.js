@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const loadingText = document.getElementById("loadingText");
     const contentEl = document.getElementById("content");
 
-    loadingText.innerText = "Server is waking up... ☕";
+    loadingText.innerText = "Good Luck...☕";
 
     // URL’den topic al
     const params = new URLSearchParams(window.location.search);
