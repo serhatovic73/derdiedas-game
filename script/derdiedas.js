@@ -1,16 +1,41 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  const loadingEl = document.getElementById("loadingScreen");
+  const loadingText = document.getElementById("loadingText");
+  const contentEl = document.getElementById("content");
+
+  if (!loadingEl || !loadingText || !contentEl) {
+    console.error("Loading elements missing");
+    return;
+  }
+
+  // ⭐ değişen mesajlar
+const messages = [
+  "One-time loading...",
+  "📚 Preparing the words...",
+  "⚡ Starting the system...",
+  "🧠 Initializing the learning engine...",
+  "🎯 Applying final touches...",
+  "🚀 Launching the game..."
+];
+
+  let i = 0;
+
+  const interval = setInterval(() => {
+    i = (i + 1) % messages.length;
+    loadingText.style.opacity = 0;
+
+    setTimeout(() => {
+      loadingText.innerText = messages[i];
+      loadingText.style.opacity = 1;
+    }, 300);
+  }, 1700);
+
   try {
-    const loadingEl = document.getElementById("loading");
-    const loadingText = document.getElementById("loadingText");
-    const contentEl = document.getElementById("content");
-
-
-    // URL’den topic al
     const params = new URLSearchParams(window.location.search);
     const topic = params.get("topic");
 
     if (!topic) {
-      loadingText.innerText = "Topic not found";
+      loadingText.innerText = "Topic bulunamadı";
       return;
     }
 
@@ -20,30 +45,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
     if (!res.ok) {
-      loadingText.innerText = "API error";
+      loadingText.innerText = "Server hatası";
       return;
     }
 
-    const topicData = await res.json();
+    const data = await res.json();
 
-    if (!topicData || !Array.isArray(topicData.substopics)) {
-      loadingText.innerText = "No data";
+    if (!data || !data.substopics) {
+      loadingText.innerText = "Veri bulunamadı";
       return;
     }
 
-    state.words = shuffle(topicData.substopics);
-
-    if (state.words.length === 0) {
-      loadingText.innerText = "Empty topic";
-      return;
-    }
+    state.words = shuffle(data.substopics);
 
     renderWord();
+    bindEvents();
+    startTimer();
 
-    // ⭐ LOADING KAPAT
+    clearInterval(interval);
+
+    // ⭐ loading kapat
     loadingEl.style.display = "none";
-    contentEl.style.display = "block";
-  } catch (err) {
-    console.error(err);
+    contentEl.style.display = "flex";
+  } catch (e) {
+    console.error(e);
+    loadingText.innerText = "Bağlantı problemi...";
   }
 });

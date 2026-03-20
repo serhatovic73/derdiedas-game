@@ -7,6 +7,29 @@ const wrongSound = new Audio("audio/wrong.mp3");
 correctSound.volume = 0.6;
 wrongSound.volume = 0.6;
 
+const loadingMessages = [
+  "📚 Tüm kelimeler hazırlanıyor...",
+  "⚡ Sizin için sistemi hızlandırıyoruz...",
+  "🧠 Öğrenme motoru çalışıyor...",
+  "🎯 Son dokunuşlar yapılıyor...",
+  "🚀 Neredeyse hazır!",
+];
+
+let loadingIndex = 0;
+
+function startLoadingMessages() {
+  const el = document.getElementById("loadingText");
+
+  setInterval(() => {
+    loadingIndex = (loadingIndex + 1) % loadingMessages.length;
+    el.style.opacity = 0;
+
+    setTimeout(() => {
+      el.innerText = loadingMessages[loadingIndex];
+      el.style.opacity = 1;
+    }, 300);
+  }, 1800);
+}
 // ===================
 // GAME STATE
 // ===================
@@ -43,6 +66,7 @@ const dom = {
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
+  startLoadingMessages(); // ⭐ başlat
   dom.correctList.innerHTML = "";
   dom.wrongList.innerHTML = "";
 
