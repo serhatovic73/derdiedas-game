@@ -9,14 +9,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // ⭐ değişen mesajlar
-const messages = [
-  "One-time loading...",
-  "📚 Preparing the words...",
-  "⚡ Starting the system...",
-  "🧠 Initializing the learning engine...",
-  "🎯 Applying final touches...",
-  "🚀 Launching the game..."
-];
+  const messages = [
+    "One-time loading...",
+    "📚 Preparing the words...",
+    "⚡ Starting the system...",
+    "🧠 Initializing the learning engine...",
+    "🎯 Applying final touches...",
+    "🚀 Launching the game...",
+  ];
 
   let i = 0;
 
@@ -35,7 +35,7 @@ const messages = [
     const topic = params.get("topic");
 
     if (!topic) {
-      loadingText.innerText = "Topic bulunamadı";
+      loadingText.innerText = " Topic not found";
       return;
     }
 
@@ -45,14 +45,14 @@ const messages = [
     );
 
     if (!res.ok) {
-      loadingText.innerText = "Server hatası";
+      loadingText.innerText = "Server error";
       return;
     }
 
     const data = await res.json();
 
     if (!data || !data.substopics) {
-      loadingText.innerText = "Veri bulunamadı";
+      loadingText.innerText = "No data found";
       return;
     }
 
@@ -69,6 +69,6 @@ const messages = [
     contentEl.style.display = "flex";
   } catch (e) {
     console.error(e);
-    loadingText.innerText = "Bağlantı problemi...";
+    loadingText.innerText = "Connection problem...";
   }
 });
